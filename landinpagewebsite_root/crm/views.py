@@ -18,12 +18,15 @@ def first_page(request):
 
     price_table = PriceTable.objects.all()
 
+    form = OrderForm()
+
     dict_objects = {
         'slider_list': slider_list,
         'pc_1': pc_1,
         'pc_2': pc_2,
         'pc_3': pc_3,
-        'price_table': price_table
+        'price_table': price_table,
+        'form': form
     }
     return render(request, './index.html', dict_objects)
 
@@ -35,5 +38,5 @@ def thanks_page(request):
     element.save()
     return render(request, './thank_page.html', {
         'name': name,
-        'phone': phone
+        # 'phone': phone
     })
