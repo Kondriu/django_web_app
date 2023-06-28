@@ -27,6 +27,7 @@ class Order(models.Model):
         verbose_name = 'Замовленя'
         verbose_name_plural = 'Замовлення'
 
+
 class CommentCrm(models.Model):
     comment_binding = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='заявка')
     comment_text = models.TextField(verbose_name='Текст комментария')
