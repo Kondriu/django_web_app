@@ -5,6 +5,7 @@ from cms.models import CmsSlider
 from price.models import PriceTable, PriceCard
 from telebot.sendmessage import setTelegramm
 
+
 # Create your views here.
 def first_page(request):
     # object_list = Order.objects.all()
@@ -31,13 +32,14 @@ def first_page(request):
     return render(request, './index.html', dict_objects)
 
 
+# обернем страницу на случай вдруг не было запроса, но к страанице обращаются
 def thanks_page(request):
-    name = request.POST['name']
-    phone = request.POST['phone']
-    element = Order(order_name=name, order_phone=phone)
-    element.save()
-    setTelegramm(name, phone)
-    return render(request, './thanks.html', {
-        'name': name,
-        # 'phone': phone
-    })
+    if request.POST:
+        name = request.POST['name']
+        phone = request.POST['phone']
+        element = Order(order_name=name, order_phone=phone)
+        element.save()
+        setTelegramm(name, phone)
+        return render(request, './thanks.html', {'name': name, })
+    else:
+        return render(request, './thanks.html')
